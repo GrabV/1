@@ -1,0 +1,14 @@
+fun main() {
+    println()
+    
+    var count = 0
+    var position = 1
+    var input: Int
+    
+    while (true) {
+        input = readLine()!!.toInt()
+        if (input == 0) break
+        if (input % 2 != 0 && position % 2 == 0) count++
+        position++
+    }
+}
