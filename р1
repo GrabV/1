@@ -1,0 +1,16 @@
+fun main() {
+    val year = 1984
+    val startYear = 1984
+    
+    val cycleNames = listOf("Зелений", "Червоний", "Жовтий", "Білий", "Чорний")
+    val animalNames = listOf("Щур", "Корова", "Тигр", "Заєць", "Дракон", "Змія", "Кінь", "Вівця", "Мавпа", "Курка", "Собака", "Свиня")
+    
+    val yearDifference = year - startYear
+    val cycleIndex = (yearDifference / 12) % 5
+    val animalIndex = yearDifference % 12
+    
+    val cycleName = cycleNames[cycleIndex]
+    val animalName = animalNames[animalIndex]
+    
+    println("$year рік - $cycleName $animalName")
+}
