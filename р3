@@ -1,0 +1,19 @@
+fun main() {
+    println()
+    val number = readLine()!!.toInt()
+
+    var powerOfThree = 1
+    var exponent = 0
+
+    while (powerOfThree < number) {
+        powerOfThree *= 3
+        exponent++
+    }
+
+    val isPowerOfThree = powerOfThree == number
+
+    if (isPowerOfThree) {
+        println("$number є степенем числа 3 (3 в степені $exponent)")
+    } else {
+        println("$number не є степенем числа 3")
+    }
