@@ -1,0 +1,28 @@
+fun main() {
+    // Введення текстового рядка
+    print("Введіть текстовий рядок: ")
+    val text = readLine() ?: return println("Введіть текст")
+
+    // Розбиття тексту на слова
+    val words = text.split(" ")
+
+    // Словник для підрахунку кількості голосних у словах
+    val vowelsCountMap = mutableMapOf<String, Int>()
+
+    // Підрахунок кількості голосних у словах
+    for (word in words) {
+        val vowelsCount = word.count { it in "aeiouyAEIOUY" }
+        vowelsCountMap[word] = vowelsCountMap[word]?.plus(1) ?: vowelsCount
+    }
+
+    // Знаходження слів з найбільшою кількістю голосних
+    val maxVowelsCount = vowelsCountMap.values.maxOrNull() ?: 0
+    val wordsWithMaxVowels = vowelsCountMap.filter { it.value == maxVowelsCount }.keys
+
+    // Виведення результату
+    println("Кількість слів: ${words.size}")
+    println("Слова з найбільшою кількістю голосних ($maxVowelsCount голосних):")
+    for (word in wordsWithMaxVowels) {
+        println(word)
+    }
+}
