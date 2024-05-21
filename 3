@@ -1,0 +1,79 @@
+class Cell(val x: Int, val y: Int, var isAlive: Boolean) {
+
+    override fun toString(): String {
+        return if (isAlive) "*" else "_"
+    }
+}
+
+class GameField(val width: Int, val height: Int) {
+
+    private val cells: MutableList<MutableList<Cell>> = MutableList(height) { mutableListOf(Cell(0, it, false)) }
+
+    init {
+        for (x in 0 until width) {
+            for (y in 0 until height) {
+                cells[y][x] = Cell(x, y, false)
+            }
+        }
+    }
+
+    fun getCell(x: Int, y: Int): Cell {
+        return cells[(y + height) % height][(x + width) % width]
+    }
+
+    fun setCell(x: Int, y: Int, isAlive: Boolean) {
+        cells[y][x].isAlive = isAlive
+    }
+
+    fun getNeighborCount(x: Int, y: Int): Int {
+        var neighborCount = 0
+        for (dx in -1..1) {
+            for (dy in -1..1) {
+                if (dx == 0 && dy == 0) {
+                    continue
+                }
+                val neighborX = (x + dx + width) % width
+                val neighborY = (y + dy + height) % height
+                neighborCount += if (cells[neighborY][neighborX].isAlive) 1 else 0
+            }
+        }
+        return neighborCount
+    }
+
+    fun nextStep() {
+        val nextStepCells = MutableList(height) { mutableListOf(Cell(0, it, false)) }
+        for (x in 0 until width) {
+            for (y in 0 until height) {
+                val cell = getCell(x, y)
+                val neighborCount = getNeighborCount(x, y)
+
+                if (cell.isAlive) {
+                    if (neighborCount < 2 || neighborCount > 3) {
+                        nextStepCells[y][x] = Cell(x, y, false)
+                    } else {
+                        nextStepCells[y][x] = Cell(x, y, true)
+                    }
+                } else {
+                    if (neighborCount == 3) {
+                        nextStepCells[y][x] = Cell(x, y, true)
+                    } else {
+                        nextStepCells[y][x] = Cell(x, y, false)
+                    }
+                }
+            }
+        }
+        cells.clear()
+        cells.addAll(nextStepCells)
+    }
+
+    override fun toString(): String {
+        val sb = StringBuilder()
+        for (y in 0 until height) {
+            for (x in 0 until width) {
+                sb.append(getCell(x, y))
+            }
+            sb.append("\n")
+        }
+        return sb.toString()
+    }
+}
