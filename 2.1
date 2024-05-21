@@ -1,0 +1,20 @@
+import kotlin.random.Random
+
+fun main() {
+    // Введення кількості чисел
+    print("Введіть кількість чисел: ")
+    val n = readLine()?.toIntOrNull() ?: return println("Неправильний формат числа")
+
+    // Генерація списку випадкових чисел
+    val numbers = MutableList(n) { Random.nextDouble() }
+
+    // Сортування списку за зростанням
+    numbers.sort()
+
+    // Перевірка чисел на збільшення номера
+    for (i in 1 until n) {
+        if (numbers[i] > numbers[i - 1]) {
+            println("${numbers[i]} - число, яке збільшило свій номер після сортування")
+        }
+    }
+}
