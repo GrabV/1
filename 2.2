@@ -1,0 +1,17 @@
+fun fibonacci(n: Int): Int {
+    if (n == 0 || n == 1) {
+        return n
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2)
+    }
+}
+
+fun main() {
+    // Введення номера числа Фібоначчі
+    print("Введіть номер числа Фібоначчі: ")
+    val n = readLine()?.toIntOrNull() ?: return println("Неправильний формат числа")
+
+    // Обчислення та виведення числа Фібоначчі
+    val fibonacciNumber = fibonacci(n)
+    println("Число Фібоначчі з номером $n: $fibonacciNumber")
+}
